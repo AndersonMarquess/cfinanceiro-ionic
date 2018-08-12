@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Nova Dívida</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list inset>
+
+        <ion-item>
+            <ion-label floating>Descrição</ion-label>
+            <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Valor</ion-label>
+            <ion-input type="number"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>Prestações</ion-label>
+            <ion-input type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Vencimento</ion-label>
+            <ion-input type="date"></ion-input>
+        </ion-item>
+
+        <button id="btn_cadastrar" ion-button block color="secondary">Cadastrar</button>
+    </ion-list>
+</ion-content>
