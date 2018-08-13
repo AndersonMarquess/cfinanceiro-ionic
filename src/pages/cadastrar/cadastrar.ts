@@ -39,7 +39,7 @@ export class CadastrarPage {
     showAlert() {
         const alert = this.alertCtrl.create({
             title: 'Nova dívida',
-            subTitle: 'Nova dívida cadastrarda com sucesso!',
+            subTitle: 'Nova dívida cadastrada com sucesso!',
             buttons: ['OK']
         });
         alert.present();

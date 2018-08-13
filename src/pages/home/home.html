@@ -12,31 +12,31 @@
 	<h2 id="titulo_dividas">Lista de dívidas</h2>
 
 	<!-- Informações das dívidas -->
-	<ion-card>
+	<ion-card *ngFor="let divida of dividas">
 		<ion-grid>
 			<ion-row>
 				<ion-col col-12>
 					<ion-label stacked>Descrição</ion-label>
-					<ion-input type="text" value="Lorem Ipsum"></ion-input>
+					<ion-input type="text" value="{{ divida.descricao }}" readonly></ion-input>
 				</ion-col>
 			</ion-row>
 
 			<ion-row>
 				<ion-col col-6>
 					<ion-label stacked>Valor</ion-label>
-					<ion-input type="text" value="R$ 999,99"></ion-input>
+					<ion-input type="text" value="R$ {{ divida.valor }}" readonly></ion-input>
 				</ion-col>
 
 				<ion-col col-6>
 					<ion-label stacked>Prestações</ion-label>
-					<ion-input type="text" value="1"></ion-input>
+					<ion-input type="text" value="{{ divida.prestacoes }}" readonly></ion-input>
 				</ion-col>
 			</ion-row>
 
 			<ion-row>
 				<ion-col col-12>
 					<ion-label stacked>Vencimento</ion-label>
-					<ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY"></ion-datetime>
+                    <ion-input type="date" value="{{ divida.vencimento }}" readonly></ion-input>
 				</ion-col>
 			</ion-row>
 
