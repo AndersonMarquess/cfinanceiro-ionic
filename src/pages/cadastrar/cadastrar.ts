@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
-import { Divida } from '../../divida/divida';
+import { Divida } from '../../models/divida/divida';
+import { DividaProvider } from '../../providers/dividas/dividas-provider';
+
 
 @IonicPage()
 @Component({
@@ -12,10 +14,9 @@ export class CadastrarPage {
 
 
     public divida: Divida = new Divida();
-    dividas: Array<Divida> = new Array<Divida>();
 
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public dividaProvider: DividaProvider) {
     }
 
 
@@ -26,14 +27,12 @@ export class CadastrarPage {
 
     criarDivida() {
         if (this.divida.descricao && this.divida.valor && this.divida.prestacoes && this.divida.vencimento) {
-            this.dividas.push(this.divida);
+            this.dividaProvider.insert(this.divida);
             this.divida = new Divida();
-            console.log(this.dividas);
             this.showAlert();
         } else {
             console.log('Erro ao tentar criar nova dívida');
         }
-
     }
 
 
@@ -45,5 +44,4 @@ export class CadastrarPage {
         });
         alert.present();
     }
-
 }

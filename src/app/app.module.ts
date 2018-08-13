@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CadastrarPage } from '../pages/cadastrar/cadastrar';
+import { DividaProvider } from '../providers/dividas/dividas-provider';
 
 @NgModule({
     declarations: [
@@ -23,12 +24,13 @@ import { CadastrarPage } from '../pages/cadastrar/cadastrar';
     entryComponents: [
         MyApp,
         HomePage,
-        CadastrarPage//Import da nova página
+        CadastrarPage//Import da nova página        
     ],
     providers: [
         StatusBar,
         SplashScreen,
-        { provide: ErrorHandler, useClass: IonicErrorHandler }
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        DividaProvider
     ]
 })
 export class AppModule { }
