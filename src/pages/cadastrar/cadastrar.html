@@ -9,28 +9,31 @@
 
 
 <ion-content padding>
+
     <ion-list inset>
 
         <ion-item>
             <ion-label floating>Descrição</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="divida.descricao"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Valor</ion-label>
-            <ion-input type="number"></ion-input>
+            <ion-input type="number" [(ngModel)]="divida.valor" value="29.90"></ion-input>
         </ion-item>
-        
+
         <ion-item>
             <ion-label floating>Prestações</ion-label>
-            <ion-input type="number"></ion-input>
+            <ion-input type="number" min="0" step="1" [(ngModel)]="divida.prestacoes" value="1"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label >Vencimento</ion-label>
-            <ion-input type="date"></ion-input>
+            <ion-label>Vencimento</ion-label>
+            <ion-input type="date" [(ngModel)]="divida.vencimento" value="2018-08-13"></ion-input>
         </ion-item>
 
-        <button id="btn_cadastrar" ion-button block color="secondary">Cadastrar</button>
+        <button id="btn_cadastrar" ion-button block color="secondary" (click)="criarDivida()" >Cadastrar</button>
+
     </ion-list>
+
 </ion-content>
