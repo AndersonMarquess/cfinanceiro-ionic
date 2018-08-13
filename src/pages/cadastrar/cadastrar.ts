@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 
 import { Divida } from '../../models/divida/divida';
 import { DividaProvider } from '../../providers/dividas/dividas-provider';
+import { HomePage } from '../home/home';
 
 
 @IonicPage()
@@ -29,17 +30,21 @@ export class CadastrarPage {
         if (this.divida.descricao && this.divida.valor && this.divida.prestacoes && this.divida.vencimento) {
             this.dividaProvider.insert(this.divida);
             this.divida = new Divida();
-            this.showAlert();
+            this.showAlert('Nova dívida cadastrada com sucesso!');
+
+            //push: muda a página e cria o botão de voltar
+            //setRoot: para impedir o botão de voltar
+            this.navCtrl.setRoot(HomePage);
         } else {
-            console.log('Erro ao tentar criar nova dívida');
+            this.showAlert('Erro ao tentar criar nova dívida.');
         }
     }
 
 
-    showAlert() {
+    showAlert(msg:string) {
         const alert = this.alertCtrl.create({
             title: 'Nova dívida',
-            subTitle: 'Nova dívida cadastrada com sucesso!',
+            subTitle: msg,
             buttons: ['OK']
         });
         alert.present();

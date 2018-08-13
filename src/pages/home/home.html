@@ -44,8 +44,8 @@
 			<ion-row>
 				<ion-col col-12>
 					<button ion-button icon-start color="secondary">
-						<ion-icon name="logo-usd"></ion-icon>
-						Pagar
+                        <ion-icon name="logo-usd"></ion-icon>
+                        Pagar
 					</button>
 
 					<button ion-button icon-start>
@@ -72,17 +72,25 @@
 			<ion-grid>
 				<ion-row>
 					<ion-label col-7>Dívidas</ion-label>
-					<ion-label col-4>R$ 99,99</ion-label>
+					<ion-label col-4>{{ dividaTotalMes | currency:'BRL'}}</ion-label>
 				</ion-row>
 				
 				<ion-row>
 					<ion-label col-7>Renda</ion-label>
-					<ion-label col-4>R$ 109,99</ion-label>
+					<ion-label col-4>{{ rendaMes | currency:'BRL'}}</ion-label>
 				</ion-row>
 				
 				<ion-row>
-					<ion-label col-7>Total disponível</ion-label>
-					<ion-label col-4>R$ 10,00</ion-label>
+                    <ion-label col-7>Total disponível</ion-label>
+                    
+                    <div *ngIf="!isSaldoPositivo" col-4 >
+                        <ion-label style="color:red;">{{ dividaTotalDisponivel | currency:'BRL'}}</ion-label>
+                    </div>
+
+                    <div *ngIf="isSaldoPositivo" col-4 >
+                        <ion-label style="color:black;">{{ dividaTotalDisponivel | currency:'BRL'}}</ion-label>
+                    </div>
+                    
 				</ion-row>
 			</ion-grid>
 		</ion-card-content>
