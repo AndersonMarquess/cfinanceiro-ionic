@@ -84,11 +84,11 @@
                     <ion-label col-7>Total disponível</ion-label>
                     
                     <div *ngIf="!isSaldoPositivo" col-4 >
-                        <ion-label style="color:red;">{{ dividaTotalDisponivel | currency:'BRL'}}</ion-label>
+                        <ion-label style="color:red;">{{ totalDisponivel | currency:'BRL'}}</ion-label>
                     </div>
 
                     <div *ngIf="isSaldoPositivo" col-4 >
-                        <ion-label style="color:black;">{{ dividaTotalDisponivel | currency:'BRL'}}</ion-label>
+                        <ion-label style="color:black;">{{ totalDisponivel | currency:'BRL'}}</ion-label>
                     </div>
                     
 				</ion-row>
@@ -107,17 +107,22 @@
 			<ion-grid>
 				<ion-row>
 					<ion-label col-7>Dívidas</ion-label>
-					<ion-label col-4>R$ 99,99</ion-label>
+					<ion-label col-4>{{ dividaTotalLongoPrazo | currency:'BRL' }}</ion-label>
 				</ion-row>
 				
 				<ion-row>
-					<ion-label col-7>Renda</ion-label>
-					<ion-label col-4>R$ 109,99</ion-label>
+					<ion-label col-7>Renda Estimada</ion-label>
+					<ion-label col-4>{{ rendaLongoPrazo | currency:'BRL' }}</ion-label>
 				</ion-row>
 				
 				<ion-row>
-					<ion-label col-7>Total disponível</ion-label>
-					<ion-label col-4>R$ 10,00</ion-label>
+                    <ion-label col-7>Total disponível</ion-label>
+                    <div *ngIf="isSaldoPositivoLongoPrazo" col-4 >
+                        <ion-label style="color:black">{{ totalDisponivelLongoPrazo | currency:'BRL' }}</ion-label>
+                    </div>
+                    <div *ngIf="!isSaldoPositivoLongoPrazo" col-4 >
+                        <ion-label style="color:red">{{ totalDisponivelLongoPrazo | currency:'BRL' }}</ion-label>
+                    </div>
 				</ion-row>
 			</ion-grid>
 		</ion-card-content>

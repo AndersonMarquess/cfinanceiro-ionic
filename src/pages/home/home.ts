@@ -13,8 +13,14 @@ export class HomePage {
 
     dividaTotalMes: number = 0;
     rendaMes: number = 0;
-    dividaTotalDisponivel: number = 0;
+    totalDisponivel: number = 0;
     isSaldoPositivo: boolean = true;
+    
+    dividaTotalLongoPrazo: number = 0;
+    rendaLongoPrazo: number = 0;
+    totalDisponivelLongoPrazo: number = 0;
+    isSaldoPositivoLongoPrazo: boolean = true;
+
 
     constructor(public navCtrl: NavController, public dividaProvider: DividaProvider) {
     }
@@ -23,6 +29,7 @@ export class HomePage {
     ionViewDidEnter() {
         this.dividas = this.dividaProvider.findAll();
         this.getResumoDoMes();
+        this.getResumoDeLongoPrazo();
     }
 
 
@@ -31,8 +38,8 @@ export class HomePage {
             this.dividaTotalMes += parseFloat(d.valor.toString());
         });
 
-        this.dividaTotalDisponivel = this.rendaMes - this.dividaTotalMes;
-        this.isSaldoPositivo = this.verificarSaldo(this.dividaTotalDisponivel);
+        this.totalDisponivel = this.rendaMes - this.dividaTotalMes;
+        this.isSaldoPositivo = this.verificarSaldo(this.totalDisponivel);
     }
 
 
@@ -41,4 +48,15 @@ export class HomePage {
     }
 
 
+    getResumoDeLongoPrazo() {
+        let i: number = 1;
+        this.dividas.forEach(d => {
+            this.dividaTotalLongoPrazo += parseFloat(d.valor.toString()) * parseInt(d.prestacoes.toString());
+            i++;
+        });
+        this.rendaLongoPrazo = this.rendaMes * i;
+        this.totalDisponivelLongoPrazo = this.rendaLongoPrazo - this.dividaTotalLongoPrazo;
+
+        this.isSaldoPositivoLongoPrazo = this.verificarSaldo(this.totalDisponivelLongoPrazo);
+    }
 }

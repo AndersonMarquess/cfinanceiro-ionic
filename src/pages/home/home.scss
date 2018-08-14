@@ -5,4 +5,13 @@ page-home {
         margin-right:auto;
         max-width:fit-content;
     }
+
+    //Corrige o problema de valores negativo até 7 dígitos
+    .label-md {
+        margin: 3px 0px 0px 0px;
+    }
+
+    [col-4] {
+        padding: 5px 0px 0px 0px;
+    }
 }
