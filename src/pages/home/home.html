@@ -24,7 +24,7 @@
 			<ion-row>
 				<ion-col col-6>
 					<ion-label stacked>Valor</ion-label>
-					<ion-input type="text" value="R$ {{ divida.valor }}" readonly></ion-input>
+					<ion-input type="text" value="{{ divida.valor | currency:'BRL' }}" readonly></ion-input>
 				</ion-col>
 
 				<ion-col col-6>
@@ -36,14 +36,14 @@
 			<ion-row>
 				<ion-col col-12>
 					<ion-label stacked>Vencimento</ion-label>
-                    <ion-input type="date" value="{{ divida.vencimento }}" readonly></ion-input>
+                    <ion-input type="text" value="{{ divida.vencimento | date:'dd/LL/yyyy' }}" readonly></ion-input>
 				</ion-col>
 			</ion-row>
 
 			<!-- Botões -->
 			<ion-row>
 				<ion-col col-12>
-					<button ion-button icon-start color="secondary">
+					<button ion-button icon-start color="secondary" (click)="pagarDivida(divida)">
                         <ion-icon name="logo-usd"></ion-icon>
                         Pagar
 					</button>
