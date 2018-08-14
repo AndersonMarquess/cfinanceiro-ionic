@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Renda</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+            <h2 id="titulo_renda">Adicionar Renda</h2>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Renda</ion-label>
+                    <ion-input type="number" [(ngModel)]="renda.renda"></ion-input>
+                </ion-item>
+            </ion-list>
+
+            <button ion-button block color="secondary" (click)="salvarRenda()">Salvar</button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

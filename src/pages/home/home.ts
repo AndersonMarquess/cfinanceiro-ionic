@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DividaProvider } from '../../providers/dividas/dividas-provider';
 import { Divida } from '../../models/divida/divida';
+import { RendaProvider } from '../../providers/rendas/rendas-provider';
 
 @Component({
     selector: 'page-home',
@@ -22,12 +23,15 @@ export class HomePage {
     isSaldoPositivoLongoPrazo: boolean = true;
 
 
-    constructor(public navCtrl: NavController, public dividaProvider: DividaProvider) {
+    constructor(public navCtrl: NavController, public dividaProvider: DividaProvider, public rendaProvider:RendaProvider) {
     }
 
 
     ionViewDidEnter() {
         this.dividas = this.dividaProvider.findAll();
+        if(this.rendaProvider.getRenda()) {
+            this.rendaMes = this.rendaProvider.getRenda().renda;
+        }
         this.getResumoDoMes();
         this.getResumoDeLongoPrazo();
     }
@@ -49,12 +53,14 @@ export class HomePage {
 
 
     getResumoDeLongoPrazo() {
-        let i: number = 1;
+        let meses: number = 1;
         this.dividas.forEach(d => {
             this.dividaTotalLongoPrazo += parseFloat(d.valor.toString()) * parseInt(d.prestacoes.toString());
-            i++;
+            if(meses < d.prestacoes) {
+                meses = d.prestacoes;
+            }
         });
-        this.rendaLongoPrazo = this.rendaMes * i;
+        this.rendaLongoPrazo = this.rendaMes * meses;
         this.totalDisponivelLongoPrazo = this.rendaLongoPrazo - this.dividaTotalLongoPrazo;
 
         this.isSaldoPositivoLongoPrazo = this.verificarSaldo(this.totalDisponivelLongoPrazo);

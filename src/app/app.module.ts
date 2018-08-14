@@ -9,12 +9,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CadastrarPage } from '../pages/cadastrar/cadastrar';
 import { DividaProvider } from '../providers/dividas/dividas-provider';
+import { RendaProvider } from '../providers/rendas/rendas-provider';
+import { RendaPage } from '../pages/renda/renda';
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
-        CadastrarPage//Import da nova página
+        CadastrarPage,//Import da nova página
+        RendaPage
     ],
     imports: [
         BrowserModule,
@@ -24,13 +27,15 @@ import { DividaProvider } from '../providers/dividas/dividas-provider';
     entryComponents: [
         MyApp,
         HomePage,
-        CadastrarPage//Import da nova página        
+        CadastrarPage,//Import da nova página        
+        RendaPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        DividaProvider
+        DividaProvider,//Import novos providers
+        RendaProvider
     ]
 })
 export class AppModule { }
