@@ -14,23 +14,35 @@ import { HomePage } from '../home/home';
 export class CadastrarPage {
 
 
-    public divida: Divida = new Divida();
+    divida: Divida = new Divida();
+    isEdicao: boolean = false;
+    dividaAntiga: Divida = null;
 
-
-    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public dividaProvider: DividaProvider) {
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+        public alertCtrl: AlertController, public dividaProvider: DividaProvider) {
     }
 
 
     ionViewDidLoad() {
-        console.clear();
+        //Recebe o parâmetro 'divida' se o mesmo estiver presente
+        this.dividaAntiga = this.navParams.get('divida');
+        if(this.dividaAntiga) {
+            this.isEdicao = true;
+            this.divida = this.dividaAntiga;
+        }
     }
 
 
     criarDivida() {
         if (this.divida.descricao && this.divida.valor && this.divida.prestacoes && this.divida.vencimento) {
-            this.dividaProvider.insert(this.divida);
+
+            if (this.isEdicao) {
+                this.editar();
+            } else {
+                this.dividaProvider.insert(this.divida);
+                this.showAlert('Nova dívida cadastrada com sucesso!');
+            }
             this.divida = new Divida();
-            this.showAlert('Nova dívida cadastrada com sucesso!');
 
             //push: muda a página e cria o botão de voltar
             //setRoot: para impedir o botão de voltar
@@ -41,12 +53,20 @@ export class CadastrarPage {
     }
 
 
-    showAlert(msg:string) {
+    showAlert(msg: string) {
         const alert = this.alertCtrl.create({
             title: 'Nova dívida',
             subTitle: msg,
             buttons: ['OK']
         });
         alert.present();
+    }
+
+
+    editar() {
+        this.isEdicao = false;
+        this.dividaProvider.editarDivida(this.dividaAntiga, this.divida);
+        this.dividaAntiga = null;
+        this.showAlert('Dívida atualizada com sucesso!');
     }
 }

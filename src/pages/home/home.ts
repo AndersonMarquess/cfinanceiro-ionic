@@ -3,6 +3,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { DividaProvider } from '../../providers/dividas/dividas-provider';
 import { Divida } from '../../models/divida/divida';
 import { RendaProvider } from '../../providers/rendas/rendas-provider';
+import { CadastrarPage } from '../cadastrar/cadastrar';
 
 @Component({
     selector: 'page-home',
@@ -23,7 +24,8 @@ export class HomePage {
     isSaldoPositivoLongoPrazo: boolean = true;
 
 
-    constructor(public navCtrl: NavController, public dividaProvider: DividaProvider, public rendaProvider: RendaProvider, public alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public dividaProvider: DividaProvider, 
+        public rendaProvider: RendaProvider, public alertCtrl: AlertController) {
     }
 
 
@@ -79,7 +81,7 @@ export class HomePage {
                     text: 'Cancelar',
                     role: 'cancel',
                     handler: () => {
-                        console.log('Cancelar clicado.');
+                        console.log('Cancelar dívida paga clicado.');
                     }
                 },
                 {
@@ -93,5 +95,35 @@ export class HomePage {
         });
         alert.present();
     }
-}
 
+
+    editarDivida(divida: Divida) {
+        //passando valor como parâmetro
+        this.navCtrl.push(CadastrarPage, {'divida': divida});
+    }
+
+
+    removerDivida(divida: Divida) {
+        let alert = this.alertCtrl.create({
+            title: 'Remover dívida',
+            message: 'Deseja realmente remover essa dívida?',
+            buttons: [
+                {
+                    text: 'Cancelar',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancelar remover dívida clicado.');
+                    }
+                },
+                {
+                    text: 'Confirmar',
+                    handler: () => {
+                        this.dividaProvider.removerDivida(divida);
+                        this.navCtrl.setRoot(HomePage);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
+}

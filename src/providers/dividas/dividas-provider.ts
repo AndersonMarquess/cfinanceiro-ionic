@@ -38,4 +38,10 @@ export class DividaProvider {
         let index = this.dividas.indexOf(divida);
         this.dividas.splice(index, 1);//Remove 1 item no index especificado
     }
+
+
+    public editarDivida(dividaAntiga: Divida, dividaNova: Divida) {
+        let index = this.dividas.indexOf(dividaAntiga);
+        this.dividas[index] = dividaNova;
+    }
 }
