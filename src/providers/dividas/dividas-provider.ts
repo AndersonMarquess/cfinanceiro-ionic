@@ -9,11 +9,15 @@ export class DividaProvider {
 
     public insert(divida: Divida) {
         this.dividas.push(divida);
-        console.log(this.dividas);
+        localStorage.setItem('dividas', JSON.stringify(this.dividas));
     }
 
 
     public findAll(): Array<Divida> {
+        let ds = JSON.parse(localStorage.getItem('dividas'));
+        if(ds) {
+            this.dividas = ds;
+        }
         return this.dividas;
     }
 
@@ -30,6 +34,7 @@ export class DividaProvider {
             dataAtualizada.setMonth(dataAtualizada.getMonth() + 1);
 
             this.dividas[index].vencimento = new Date(dataAtualizada.toISOString()); 
+            localStorage.setItem('dividas', JSON.stringify(this.dividas));
         }
     }
 
@@ -37,11 +42,13 @@ export class DividaProvider {
     public removerDivida(divida: Divida) {
         let index = this.dividas.indexOf(divida);
         this.dividas.splice(index, 1);//Remove 1 item no index especificado
+        localStorage.setItem('dividas', JSON.stringify(this.dividas));
     }
 
 
     public editarDivida(dividaAntiga: Divida, dividaNova: Divida) {
         let index = this.dividas.indexOf(dividaAntiga);
         this.dividas[index] = dividaNova;
+        localStorage.setItem('dividas', JSON.stringify(this.dividas));
     }
 }
