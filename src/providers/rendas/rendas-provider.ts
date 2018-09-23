@@ -18,4 +18,8 @@ export class RendaProvider {
         }
         return this.renda;
     }
+
+    public delete() {
+        this.insert(new Renda());
+    }
 }

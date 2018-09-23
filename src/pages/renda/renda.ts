@@ -37,4 +37,29 @@ export class RendaPage {
         alert.present();
     }
 
+    removerRenda() {
+        let alert = this.alertCtrl.create({
+            title: 'Remover renda',
+            message: 'Deseja realmente remover sua renda no valor de R$ '+
+                this.rendaProvider.getRenda().renda+' ?',
+            buttons: [
+                {
+                    text: 'Cancelar',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancelar remover renda clicado.');
+                    }
+                },
+                {
+                    text: 'Confirmar',
+                    handler: () => {
+                        this.rendaProvider.delete();
+                        this.navCtrl.setRoot(HomePage);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
+
 }
