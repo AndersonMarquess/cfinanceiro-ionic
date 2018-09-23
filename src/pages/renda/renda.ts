@@ -13,7 +13,8 @@ export class RendaPage {
 
     renda:Renda = new Renda();
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public rendaProvider: RendaProvider, public alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, 
+        public rendaProvider: RendaProvider, public alertCtrl: AlertController) {
     }
 
     salvarRenda() {

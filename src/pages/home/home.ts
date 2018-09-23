@@ -42,6 +42,7 @@ export class HomePage {
     getResumoDoMes() {
         let mesAtual = new Date().getMonth();
         
+        this.dividaTotalMes = 0;
         this.dividas.forEach(d => {
             if(mesAtual >= new Date(d.vencimento).getMonth())
                 this.dividaTotalMes += parseFloat(d.valor.toString());
@@ -59,6 +60,7 @@ export class HomePage {
 
     getResumoDeLongoPrazo() {
         let meses: number = 1;
+        this.dividaTotalLongoPrazo = 0;
         this.dividas.forEach(d => {
             this.dividaTotalLongoPrazo += parseFloat(d.valor.toString()) * parseInt(d.prestacoes.toString());
             if (meses < d.prestacoes) {
